@@ -1,4 +1,4 @@
-<!doctype html>
+  <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,9 @@
       content="Mark and Mhekyla — our little world, made with love."
     />
     <meta name="theme-color" content="#f5f2ff" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Mark and Mhekyla</title>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
@@ -66,19 +69,19 @@
       >
         <section class="memories" aria-labelledby="memories-title">
           <header class="memories__header">
-            <h2 id="memories-title" tabindex="-1">Our Memories</h2>
+            <h2 id="memories-title" tabindex="-1"><span id="day-counter">973</span> Days</h2>
           </header>
 
           <div class="memory-grid">
             <button
               class="memory-card"
               type="button"
-              data-full-image="memory-1.png"
+              data-full-image="images/memory-1.png"
               data-caption="A moment with you under the stars ❤️"
               aria-label="Enlarge: A moment with you under the stars ❤️"
             >
               <img
-                src="memory-1.png"
+                src="images/memory-1.png"
                 alt="Mark and Mhekyla together at night"
                 loading="lazy"
               />
@@ -87,12 +90,12 @@
             <button
               class="memory-card"
               type="button"
-              data-full-image="memory-2.png"
+              data-full-image="images/memory-2.png"
               data-caption="You make me smile, Baby 💙"
               aria-label="Enlarge: You make me smile, Baby 💙"
             >
               <img
-                src="memory-2.png"
+                src="images/memory-2.png"
                 alt="Mark posing behind Mhekyla"
                 loading="lazy"
               />
@@ -101,30 +104,16 @@
             <button
               class="memory-card"
               type="button"
-              data-full-image="memory-3.png"
+              data-full-image="images/memory-3.png"
               data-caption="32 months later, and you're still my favorite view"
               aria-label="Enlarge: 32 months later, and you're still my favorite view"
             >
               <img
-                src="memory-3.png"
+                src="images/memory-3.png"
                 alt="Mark and Mhekyla taking a selfie together"
                 loading="lazy"
               />
               <span class="memory-card__caption">32 months later, and you're still my favorite view</span>
-            </button>
-            <button
-              class="memory-card"
-              type="button"
-              data-full-image="memory-4.png"
-              data-caption="A day made brighter by you"
-              aria-label="Enlarge: A day made brighter by you"
-            >
-              <img
-                src="memory-4.png"
-                alt="Mark and Mhekyla smiling close together"
-                loading="lazy"
-              />
-              <span class="memory-card__caption">A day made brighter by you</span>
             </button>
           </div>
           <button class="button button--secondary back-home" id="back-to-home" type="button">
@@ -186,7 +175,7 @@
             <img
               class="final-reveal"
               id="final-reveal"
-              src="final-surprise.png"
+              src="images/final-surprise.png"
               alt="A childhood photo of Mhekyla in a red dance costume"
               hidden
             />

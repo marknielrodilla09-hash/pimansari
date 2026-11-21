@@ -13,6 +13,60 @@ const openFinalSurpriseButton = document.querySelector("#open-final-surprise");
 const backToMessageButton = document.querySelector("#back-to-message");
 const revealFinalSurpriseButton = document.querySelector("#reveal-final-surprise");
 const finalReveal = document.querySelector("#final-reveal");
+const dayCounter = document.querySelector("#day-counter");
+
+const relationshipStartDate = [2024, 2, 23];
+
+function updateDayCounter() {
+  if (!dayCounter) {
+    return;
+  }
+
+  const today = new Date();
+  const startUtc = Date.UTC(
+    relationshipStartDate[0],
+    relationshipStartDate[1],
+    relationshipStartDate[2],
+  );
+  const todayUtc = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+  const elapsedDays = Math.max(
+    0,
+    Math.floor((todayUtc - startUtc) / (1000 * 60 * 60 * 24)),
+  );
+
+  dayCounter.textContent = String(elapsedDays);
+}
+
+function scheduleDayCounterUpdate() {
+  const now = new Date();
+  const nextMidnight = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1,
+    0,
+    0,
+    0,
+    100,
+  );
+
+  window.setTimeout(() => {
+    updateDayCounter();
+    scheduleDayCounterUpdate();
+    window.setInterval(updateDayCounter, 60 * 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        updateDayCounter();
+      }
+    });
+  }, nextMidnight.getTime() - now.getTime());
+}
+
+updateDayCounter();
+scheduleDayCounterUpdate();
 
 openGiftButton.addEventListener("click", () => {
   gift.classList.add("is-open");

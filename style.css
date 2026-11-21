@@ -54,6 +54,30 @@ button {
   isolation: isolate;
 }
 
+.page::before,
+.page::after {
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.page::before {
+  background: url("images/memory-3.png") center 42% / cover no-repeat;
+  opacity: 0.16;
+}
+
+.page::after {
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(231, 225, 255, 0.72),
+    rgba(245, 242, 255, 0.78) 55%,
+    rgba(223, 243, 255, 0.7)
+  );
+}
+
 .view {
   display: grid;
   width: 100%;
@@ -229,6 +253,10 @@ button {
   cursor: zoom-in;
   text-align: left;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.memory-card:last-child:nth-child(3) {
+  grid-column: 2;
 }
 
 .memory-card:hover {
@@ -707,6 +735,12 @@ h1 {
     font-size: 0.88rem;
   }
 
+  .memory-card:last-child:nth-child(3) {
+    width: calc((100% - 12px) / 2);
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
   .lightbox {
     padding: 10px;
   }
@@ -728,6 +762,12 @@ h1 {
 
   .memory-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .memory-card:last-child:nth-child(3) {
+    width: calc((100% - clamp(18px, 2.4vw, 36px)) / 2);
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 }
 
