@@ -64,17 +64,16 @@ button {
 }
 
 .page::before {
-  background: url("images/memory-3.png") center 42% / cover no-repeat;
-  opacity: 0.16;
+  background: url("images/couple-background.png") center 42% / cover no-repeat;
 }
 
 .page::after {
   z-index: -1;
   background: linear-gradient(
     135deg,
-    rgba(231, 225, 255, 0.72),
-    rgba(245, 242, 255, 0.78) 55%,
-    rgba(223, 243, 255, 0.7)
+    rgba(231, 225, 255, 0.4),
+    rgba(245, 242, 255, 0.4) 55%,
+    rgba(223, 243, 255, 0.4)
   );
 }
 
