@@ -12,7 +12,9 @@ const backToMemoriesButton = document.querySelector("#back-to-memories");
 const openFinalSurpriseButton = document.querySelector("#open-final-surprise");
 const backToMessageButton = document.querySelector("#back-to-message");
 const revealFinalSurpriseButton = document.querySelector("#reveal-final-surprise");
-const finalReveal = document.querySelector("#final-reveal");
+const finalCard = document.querySelector(".final-card");
+const finalMessage = document.querySelector("#final-message");
+const finalGallery = document.querySelector("#final-gallery");
 const dayCounter = document.querySelector("#day-counter");
 
 const relationshipStartDate = [2024, 2, 23];
@@ -130,6 +132,9 @@ continueButton.addEventListener("click", () => {
 
 backHomeButton.addEventListener("click", () => {
   switchView(memoriesView, homeView);
+  gift.classList.remove("is-open");
+  openGiftButton.hidden = false;
+  surprise.hidden = true;
 });
 
 readMessageButton.addEventListener("click", () => {
@@ -146,11 +151,17 @@ openFinalSurpriseButton.addEventListener("click", () => {
 
 backToMessageButton.addEventListener("click", () => {
   switchView(finalView, messageView);
+  finalGallery.hidden = true;
+  revealFinalSurpriseButton.hidden = false;
+  finalMessage.hidden = false;
+  finalCard.hidden = false;
 });
 
 revealFinalSurpriseButton.addEventListener("click", () => {
-  finalReveal.hidden = false;
+  finalMessage.hidden = true;
+  finalGallery.hidden = false;
   revealFinalSurpriseButton.hidden = true;
+  finalCard.hidden = true;
 });
 
 const lightbox = document.querySelector("#lightbox");
@@ -159,24 +170,33 @@ const lightboxCaption = document.querySelector("#lightbox-caption");
 const closeLightboxButton = document.querySelector(".lightbox__close");
 const previousPhotoButton = document.querySelector("#previous-photo");
 const nextPhotoButton = document.querySelector("#next-photo");
-const memoryCards = [...document.querySelectorAll(".memory-card")];
+const memoryCards = [...document.querySelectorAll("#memories-view .memory-card")];
+const finalPhotoCards = [...document.querySelectorAll(".final-photo-card")];
+let activePhotoCards = [];
 let activePhotoIndex = 0;
 
 function showPhoto(index) {
-  activePhotoIndex = (index + memoryCards.length) % memoryCards.length;
-  const card = memoryCards[activePhotoIndex];
+  activePhotoIndex = (index + activePhotoCards.length) % activePhotoCards.length;
+  const card = activePhotoCards[activePhotoIndex];
 
   lightboxImage.src = card.dataset.fullImage;
-  lightboxImage.alt = card.dataset.caption;
-  lightboxCaption.textContent = card.dataset.caption;
+  lightboxImage.alt = card.dataset.caption || card.querySelector("img").alt;
+  lightboxCaption.textContent = card.dataset.caption || "";
+  lightboxCaption.hidden = !card.dataset.caption;
 }
 
-memoryCards.forEach((card, index) => {
-  card.addEventListener("click", () => {
-    showPhoto(index);
-    lightbox.showModal();
+function addPhotoOpenHandlers(cards) {
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      activePhotoCards = cards;
+      showPhoto(index);
+      lightbox.showModal();
+    });
   });
-});
+}
+
+addPhotoOpenHandlers(memoryCards);
+addPhotoOpenHandlers(finalPhotoCards);
 
 previousPhotoButton.addEventListener("click", () => {
   showPhoto(activePhotoIndex - 1);
